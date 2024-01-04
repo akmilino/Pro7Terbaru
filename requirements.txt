@@ -1,3 +1,4 @@
 tensorflow
 streamlit
 protobuf
+tensorflow_hub
