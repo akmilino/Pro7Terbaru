@@ -22,19 +22,21 @@ def preprocess_image(img_path):
 st.title("Aplikasi Klasifikasi Gambar")
 
 # Mengunggah gambar melalui Streamlit
-uploaded_file = st.file_uploader("Pilih gambar...", type="jpg")
+uploaded_file = st.file_uploader("Pilih gambar...", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     # Menampilkan gambar yang diunggah
     st.image(uploaded_file, caption="Gambar yang diunggah.", use_column_width=True)
 
-    # Memproses gambar dan membuat prediksi
-    img_array = preprocess_image(uploaded_file)
-    predictions = loaded_model.predict(img_array)
+    # Menambahkan tombol prediksi
+    if st.button("Prediksi"):
+        # Memproses gambar dan membuat prediksi
+        img_array = preprocess_image(uploaded_file)
+        predictions = loaded_model.predict(img_array)
 
-    # Menampilkan prediksi
-    st.subheader("Prediksi:")
-    class_names = ["negative", "severe"]  # Ganti dengan nama kelas yang sesuai
-    predicted_class = class_names[np.argmax(predictions)]
+        # Menampilkan prediksi
+        st.subheader("Prediksi:")
+        class_names = ["negative", "severe"]  # Ganti dengan nama kelas yang sesuai
+        predicted_class = class_names[np.argmax(predictions)]
 
-    st.write(f"Model memprediksi: {predicted_class}")
+        st.write(f"Model memprediksi: {predicted_class}")
