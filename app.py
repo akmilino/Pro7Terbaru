@@ -19,7 +19,7 @@ def preprocess_image(img_path):
     return img_array
 
 # Aplikasi Streamlit
-st.title("Aplikasi Klasifikasi Gambar")
+st.title("Pneumonia Detection")
 
 # Mengunggah gambar melalui Streamlit
 uploaded_file = st.file_uploader("Pilih gambar...", type=["jpg", "jpeg", "png"])
