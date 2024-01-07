@@ -19,24 +19,38 @@ def preprocess_image(img_path):
     return img_array
 
 # Aplikasi Streamlit
-st.title("Pneumonia Detection")
+selected_page = st.sidebar.radio("Menu", ["Home", "Prediction", "About Us"])
 
-# Mengunggah gambar melalui Streamlit
-uploaded_file = st.file_uploader("Pilih gambar...", type=["jpg", "jpeg", "png"])
+if selected_page == "Home":
+    st.title("Selamat Datang di Web PROTECT")
+    st.write("Web ini dapat anda gunakan untuk mengunggah gambar dan melakukan prediksi menggunakan AI.")
+    st.image("Screenshot (1).png", use_column_width=True)
 
-if uploaded_file is not None:
-    # Menampilkan gambar yang diunggah
-    st.image(uploaded_file, caption="Gambar yang diunggah.", use_column_width=True)
+elif selected_page == "Prediction":
+    st.title("Upload Gambar")
 
-    # Menambahkan tombol prediksi
-    if st.button("Prediksi"):
-        # Memproses gambar dan membuat prediksi
-        img_array = preprocess_image(uploaded_file)
-        predictions = loaded_model.predict(img_array)
+    # Mengunggah gambar melalui Streamlit
+    uploaded_file = st.file_uploader("Pilih gambar...", type=["jpg", "png", "jpeg"])
 
-        # Menampilkan prediksi
-        st.subheader("Prediksi:")
-        class_names = ["negative", "severe"]  # Ganti dengan nama kelas yang sesuai
-        predicted_class = class_names[np.argmax(predictions)]
+    if uploaded_file is not None:
+        # Menampilkan gambar yang diunggah
+        st.image(uploaded_file, caption="Gambar Berhasil Diunggah.", use_column_width=True)
 
-        st.write(f"Model memprediksi: {predicted_class}")
+        # Menambahkan tombol prediksi
+        if st.button("Prediksi"):
+            # Memproses gambar dan membuat prediksi
+            img_array = preprocess_image(uploaded_file)
+            predictions = loaded_model.predict(img_array)
+
+            # Menampilkan prediksi
+            st.subheader("Prediksi:")
+            class_names = ["negative", "severe"]  # Ganti dengan nama kelas yang sesuai
+            predicted_class = class_names[np.argmax(predictions)]
+
+            st.write(f"Hasil Prediksi: {predicted_class}")
+
+elif selected_page == "About Us":
+    st.title("Tentang Kami")
+    st.write("PRO7 adalah tim pengembang dalam bidang AI yang berkomitmen untuk terus mengembangkan aplikasi yang menggunakan AI.")
+    st.write("pada aplikasi ini AI berperan dalam pendeteksi Pneumonia sehingga memudahkan untuk mengklasifikasikan gambar paru-paru penderita Pneumonia.")
+    st.write("untuk website ini masih dalam pengembangan, jangan ragu untuk memberikan saran kontak kami pro7@gmail.com")
