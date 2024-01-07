@@ -22,7 +22,7 @@ selected_page = st.sidebar.radio("Menu", ["Home", "Prediction", "About Us"])
 if selected_page == "Home":
     st.title("Selamat Datang di Web PROTECT")
     st.write("Web ini dapat anda gunakan untuk mengunggah gambar dan melakukan prediksi menggunakan AI.")
-    st.image("image/negative(48)", use_column_width=True)
+    st.image("image/negative (48).jpg", use_column_width=True)
 
 elif selected_page == "Prediction":
     st.title("Upload Gambar")
